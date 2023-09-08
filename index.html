@@ -1,169 +1,177 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="">
-      <meta name="author" content="">
-	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-	<link rel="manifest" href="favicon/site.webmanifest">
-	  
-      <title>Excel To Sql</title>
-      <style>
-         body {
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+
+    <title>Excel To Sql</title>
+    <style>
+        body {
 			background-color:#1F1F1F !Important;
 			color: white !Important;
          }
-      </style>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>     
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	  
-   </head>
-   <body>
-      <div id="wrapper">
-         <div id="page-wrapper">
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="page-wrapper">
             <div class="container-fluid">
-               <!-------------
+                <!-------------
                   Content section
                   --------------->
-               <div class="row">
-                  <div class="col-lg-12">
-                     <hr>
-                     <h2 class="intro-text text-center">
-                        <strong>Paste Data From Excel Below</strong>
-                     </h2>
-                     <hr>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <textarea id="text" style="width:100%; height:100%;" rows="20"></textarea>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <hr>
+                        <h2 class="intro-text text-center">
+                            <strong>Paste Data From Excel Below</strong>
+                        </h2>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="text" style="width:100%; height:100%;" rows="20"></textarea>
+                            </div>
                         </div>
-                     </div>
-                     <div class="row mt-3">
-                        <div class="col-md-5">
-                           <button class="btn btn-info btn-block action" id="inString">Format for IN</button>
+                        <div class="row mt-3">
+                            <div class="col-md-5">
+                                <button class="btn btn-info btn-block action" id="inString">Format for IN</button>
+                            </div>
+                            <div class="col-md-5">
+                                <button class="btn btn-danger btn-block action" id="value">Format for VALUE</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-default btn-block" id="undo" disabled="true">Undo</button>
+                            </div>
                         </div>
-                        <div class="col-md-5">
-                           <button class="btn btn-danger btn-block action" id="value">Format for VALUE</button>
+                        <div class="row" style="padding-top:25px;">
+                            <div class="col-md">
+                                <button class="btn btn-info btn-block action" id="inStrOneLine">Format for IN (One Line)</button>
+                            </div>
+                            <div class="col-md">
+                                <button class="btn btn-danger btn-block action" id="valueOneLine">Format for VALUE (One Line)</button>
+                            </div>
+                            <div class="col-md">
+                                <button class="btn btn-success btn-block action" id="emptySelect">Empty Select</button>
+                            </div>
+                            <div class="col-md">
+                                <button class="btn btn-warning btn-block action" id="CommaSeperated">Comma Seperated</button>
+                            </div>
+                            <div class="col-md">
+                                <button class="btn btn-block btn-primary" id="case">Case Statement</button>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                           <button class="btn btn-default btn-block" id="undo" disabled="true">Undo</button>
+                        <div class="row mt-5">
+                            <div class="col text-center" style="color:darkgray">
+                               <i>Explanations for the functions can be found here <a href="https://github.com/gandi800/ExcelToSql">Function Explanations</a></i>
+                            </div>
                         </div>
-                     </div>
-                     <div class="row" style="padding-top:25px;">
-                        <div class="col-md">
-                           <button class="btn btn-info btn-block action" id="inStrOneLine">Format for IN (One Line)</button>
-                        </div>
-                        <div class="col-md">
-                           <button class="btn btn-danger btn-block action" id="valueOneLine">Format for VALUE (One Line)</button>
-                        </div>
-                        <div class="col-md">
-                           <button class="btn btn-success btn-block action" id="emptySelect">Empty Select</button>
-                        </div>
-                        <div class="col-md">
-                           <button class="btn btn-warning btn-block action" id="CommaSeperated">Comma Separated</button>
-                        </div>
-                        <div class="col-md">
-                           <button class="btn btn-block btn-primary" id="case">Case Statement</button>
-                        </div>
-                     </div>
                     </div>
-               </div>
-               <script>
-					function storeUndo() {
-						undoVal[undoVal.length] = $('#text').val()
-						if (undoVal.length == 0) {
-							$('#undo').attr("disabled", true)
-						} else {
-							$('#undo').attr("disabled", false)
-						}
-					};
-					var undoVal = [];
-					$('#inString').click(function() {
-						storeUndo()
-						var rplc = $('#text').val().trim()
-						rplc = rplc.replace(/\t/gm, "','")
-						rplc = rplc.replace(/^/gm, "'")
-						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "',\n")
-						rplc = "(" + rplc.trim(',') + "')"
-						$('#text').val(rplc)
-					});
-					$('#inStrOneLine').click(function() {
-						storeUndo()
-						var rplc = $('#text').val().trim()
-						rplc = rplc.replace(/\t/gm, "','")
-						rplc = rplc.replace(/^/gm, "'")
-						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "',")
-						rplc = "(" + rplc.trim(',') + "')"
-						$('#text').val(rplc)
-					});
-					$('#inInt').click(function() {
-						storeUndo()
-						var rplc = $('#text').val().trim()
-						rplc = rplc.replace(/\t/gm, ",")
-						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, ",\n")
-						rplc = "(" + rplc.trim(',') + ")"
-						$('#text').val(rplc)
-					});
-					$('#value').click(function() {
-						storeUndo()
-						var rplc = $('#text').val().trim()
-						rplc = rplc.replace(/\t/gm, "','")
-						rplc = rplc.replace(/^/gm, "('")
-						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "'),\n")
-						rplc = rplc.trim(',')
-						rplc = rplc + "')"
-						$('#text').val(rplc)
-					});
-					$('#valueOneLine').click(function() {
-						storeUndo()
-						var rplc = $('#text').val().trim()
-						rplc = rplc.replace(/\t/gm, "','")
-						rplc = rplc.replace(/^/gm, "('")
-						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "'),")
-						rplc = rplc.trim(',')
-						rplc = rplc + "')"
-						$('#text').val(rplc)
-					});
-					$('#CommaSeperated').click(function() {
-						storeUndo()
-						var rplc = $('#text').val().trim()
-						rplc = rplc.replace(/\t/gm, ",")
-						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, ",")
-						rplc = rplc.trim(',')
-						$('#text').val(rplc)
-					});
-					$('#emptySelect').click(function() {
-						storeUndo()
-						var rplc = $('#text').val().trim()
-						rplc = rplc.replace(/\t/gm, "\n")
-						rplc = rplc.replace(/^/gm, "'' [")
-						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "],\n")
-						rplc = "SELECT \n" + rplc.trim(',') + "]\nFROM"
-						$('#text').val(rplc)
-					});
-					$('#case').click(function() {
-						storeUndo()
-						var rplc = $('#text').val().trim()
-						rplc = rplc.replace(/\t/gm, "' THEN '")
-						rplc = rplc.replace(/^/gm, "WHEN '")
-						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "'\n")
-						rplc = "CASE [field]\n" + rplc.trim(',') + "'\nEND"
-						$('#text').val(rplc)
-					});
-					$('#undo').click(function() {
-						$('#text').val(undoVal[undoVal.length - 1])
-						undoVal.pop()
-						if (undoVal.length == 0) {
-							$('#undo').attr("disabled", true)
-						}
-					})
-               </script>
+                </div>
+                <script>
+                    function storeUndo() {
+                    						undoVal[undoVal.length] = $('#text').val()
+                    						if (undoVal.length == 0) {
+                    							$('#undo').attr("disabled", true)
+                    						} else {
+                    							$('#undo').attr("disabled", false)
+                    						}
+                    					};
+                    					var undoVal = [];
+                    					$('#inString').click(function() {
+                    						storeUndo()
+                    						var rplc = $('#text').val().trim()
+                    						rplc = rplc.replace(/\t/gm, "','")
+                    						rplc = rplc.replace(/^/gm, "'")
+                    						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "',\n")
+                    						rplc = "(" + rplc.trim(',') + "')"
+                    						$('#text').val(rplc)
+                    					});
+                    					$('#inStrOneLine').click(function() {
+                    						storeUndo()
+                    						var rplc = $('#text').val().trim()
+                    						rplc = rplc.replace(/\t/gm, "','")
+                    						rplc = rplc.replace(/^/gm, "'")
+                    						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "',")
+                    						rplc = "(" + rplc.trim(',') + "')"
+                    						$('#text').val(rplc)
+                    					});
+                    					$('#inInt').click(function() {
+                    						storeUndo()
+                    						var rplc = $('#text').val().trim()
+                    						rplc = rplc.replace(/\t/gm, ",")
+                    						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, ",\n")
+                    						rplc = "(" + rplc.trim(',') + ")"
+                    						$('#text').val(rplc)
+                    					});
+                    					$('#value').click(function() {
+                    						storeUndo()
+                    						var rplc = $('#text').val().trim()
+                    						rplc = rplc.replace(/\t/gm, "','")
+                    						rplc = rplc.replace(/^/gm, "('")
+                    						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "'),\n")
+                    						rplc = rplc.trim(',')
+                    						rplc = rplc + "')"
+                    						$('#text').val(rplc)
+                    					});
+                    					$('#valueOneLine').click(function() {
+                    						storeUndo()
+                    						var rplc = $('#text').val().trim()
+                    						rplc = rplc.replace(/\t/gm, "','")
+                    						rplc = rplc.replace(/^/gm, "('")
+                    						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "'),")
+                    						rplc = rplc.trim(',')
+                    						rplc = rplc + "')"
+                    						$('#text').val(rplc)
+                    					});
+                    					$('#CommaSeperated').click(function() {
+                    						storeUndo()
+                    						var rplc = $('#text').val().trim()
+                    						rplc = rplc.replace(/\t/gm, ",")
+                    						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, ",")
+                    						rplc = rplc.trim(',')
+                    						$('#text').val(rplc)
+                    					});
+                    					$('#emptySelect').click(function() {
+                    						storeUndo()
+                    						var rplc = $('#text').val().trim()
+                    						rplc = rplc.replace(/\t/gm, "\n")
+                    						rplc = rplc.replace(/^/gm, "'' [")
+                    						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "],\n")
+                    						rplc = "SELECT \n" + rplc.trim(',') + "]\nFROM"
+                    						$('#text').val(rplc)
+                    					});
+                    					$('#case').click(function() {
+                    						storeUndo()
+                    						var rplc = $('#text').val().trim()
+                    						rplc = rplc.replace(/\t/gm, "' THEN '")
+                    						rplc = rplc.replace(/^/gm, "WHEN '")
+                    						rplc = rplc.replace(/(?:\r\n|\r|\n)/g, "'\n")
+                    						rplc = "CASE [field]\n" + rplc.trim(',') + "'\nEND"
+                    						$('#text').val(rplc)
+                    					});
+                    					$('#undo').click(function() {
+                    						$('#text').val(undoVal[undoVal.length - 1])
+                    						undoVal.pop()
+                    						if (undoVal.length == 0) {
+                    							$('#undo').attr("disabled", true)
+                    						}
+                    					})
+                </script>
             </div>
-         </div>
-      </div>
-   </body>
+        </div>
+    </div>
+</body>
+
 </html>
